@@ -28,26 +28,26 @@ pipeline {
             }
         }
 
-       stage('Check Kubernetes Access') {
-steps {
-echo "Checking Kubernetes configuration"
-bat 'kubectl --kubeconfig=C:\Users\shiva\.kube\config config current-context'
-bat 'kubectl --kubeconfig=C:\Users\shiva\.kube\config get nodes'
-}
-}
+        stage('Check Kubernetes Access') {
+            steps {
+                echo "Checking Kubernetes configuration"
+                bat 'kubectl --kubeconfig=C:\\Users\\shiva\\.kube\\config config current-context'
+                bat 'kubectl --kubeconfig=C:\\Users\\shiva\\.kube\\config get nodes'
+            }
+        }
 
         stage('Deploy to Kubernetes') {
             steps {
-                bat "kubectl apply -f deployment.yaml --validate=false"
-                bat "kubectl apply -f service.yaml"
+                bat 'kubectl --kubeconfig=C:\\Users\\shiva\\.kube\\config apply -f deployment.yaml --validate=false'
+                bat 'kubectl --kubeconfig=C:\\Users\\shiva\\.kube\\config apply -f service.yaml'
             }
         }
 
         stage('Verify Deployment') {
             steps {
-                bat "kubectl rollout status deployment/kubedemoapp-deployment"
-                bat "kubectl get pods -o wide"
-                bat "kubectl get svc kubedemoapp-service"
+                bat 'kubectl --kubeconfig=C:\\Users\\shiva\\.kube\\config rollout status deployment/kubedemoapp-deployment'
+                bat 'kubectl --kubeconfig=C:\\Users\\shiva\\.kube\\config get pods -o wide'
+                bat 'kubectl --kubeconfig=C:\\Users\\shiva\\.kube\\config get svc kubedemoapp-service'
             }
         }
     }
