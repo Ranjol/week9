@@ -28,6 +28,15 @@ pipeline {
             }
         }
 
+        stage('Check Kubernetes Access') {
+            steps {
+                echo "Checking Kubernetes configuration"
+                bat 'echo %USERPROFILE%'
+                bat 'kubectl config current-context'
+                bat 'kubectl get nodes'
+            }
+        }
+
         stage('Deploy to Kubernetes') {
             steps {
                 bat "kubectl apply -f deployment.yaml --validate=false"
