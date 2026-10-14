@@ -28,14 +28,13 @@ pipeline {
             }
         }
 
-        stage('Check Kubernetes Access') {
-            steps {
-                echo "Checking Kubernetes configuration"
-                bat 'echo %USERPROFILE%'
-                bat 'kubectl config current-context'
-                bat 'kubectl get nodes'
-            }
-        }
+       stage('Check Kubernetes Access') {
+steps {
+echo "Checking Kubernetes configuration"
+bat 'kubectl --kubeconfig=C:\Users\shiva\.kube\config config current-context'
+bat 'kubectl --kubeconfig=C:\Users\shiva\.kube\config get nodes'
+}
+}
 
         stage('Deploy to Kubernetes') {
             steps {
