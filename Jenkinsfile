@@ -4,19 +4,19 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo "Building Docker Image"
-                bat "docker build -t muskeharini/myapp:testimage ."
+                bat "docker build -t ranjol/week8:testimage ."
             }
         }
 
         stage('Docker Login') {
             steps {
-                bat "docker login -u muskeharini"
+                bat "docker login -u ranjol"
             }
         }
         stage('Push Docker Image to Docker Hub') {
             steps {
                 echo "Pushing Docker Image to Docker Hub"
-                bat "docker push muskeharini/myapp:testimage"
+                bat "docker push ranjol/week8:testimage"
             }
         }
         stage('Deploy to Kubernetes') {
